@@ -23,11 +23,13 @@ line list = [<IP Address>, -, [<date>], "GET /projects/260 HTTP/1.1",
 
 import sys
 
+
+total_size = 0  # Initialize the total file size to 0
+
 # Store the count of all status codes in a dictionary
-status_codes_dict = {'200': 0, '301': 0, '400': 0, '401': 0, '403': 0,
+status_count = {'200': 0, '301': 0, '400': 0, '401': 0, '403': 0,
                      '404': 0, '405': 0, '500': 0}
 
-total_size = 0
 count = 0  # Keep count of the number lines counted
 
 try:
@@ -40,8 +42,8 @@ try:
             file_size = int(line_list[-1])
 
             # Check if the status code received exists in the dictionary and increment its count
-            if status_code in status_codes_dict.keys():
-                status_codes_dict[status_code] += 1
+            if status_code in status_count.keys():
+                status_count[status_code] += 1
 
             # Update total size
             total_size += file_size
@@ -55,7 +57,7 @@ try:
             print('File size: {}'.format(total_size))
 
             # Print status code counts
-            for key, value in sorted(status_codes_dict.items()):
+            for key, value in sorted(status_count.items()):
                 if value != 0:
                     print('{}: {}'.format(key, value))
 
@@ -65,6 +67,6 @@ except KeyboardInterrupt:
 finally:
     # Print final statistics after loop completion or interruption
     print('File size: {}'.format(total_size))
-    for key, value in sorted(status_codes_dict.items()):
+    for key, value in sorted(status_count.items()):
         if value != 0:
             print('{}: {}'.format(key, value))
