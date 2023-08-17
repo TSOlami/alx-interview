@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-This script reads stdin line by line and computes metrics based on the provided input format.
+This script reads stdin line by line and computes metrics based on the provided
+input format.
 
 Input format: <IP Address> - [<date>] "GET /projects/260 HTTP/1.1"
 <status code> <file size>
@@ -28,7 +29,7 @@ total_size = 0  # Initialize the total file size to 0
 
 # Store the count of all status codes in a dictionary
 status_count = {'200': 0, '301': 0, '400': 0, '401': 0, '403': 0,
-                     '404': 0, '405': 0, '500': 0}
+                '404': 0, '405': 0, '500': 0}
 
 count = 0  # Keep count of the number lines counted
 
@@ -41,7 +42,8 @@ try:
             status_code = line_list[-2]
             file_size = int(line_list[-1])
 
-            # Check if the status code received exists in the dictionary and increment its count
+            # Check if the status code received exists in the dictionary
+            # and increment its count
             if status_code in status_count.keys():
                 status_count[status_code] += 1
 
