@@ -63,7 +63,7 @@ try:
                 if value != 0:
                     print('{}: {}'.format(key, value))
 
-except KeyboardInterrupt:
+except Exception as err:
     pass
 
 finally:
