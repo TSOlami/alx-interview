@@ -18,6 +18,7 @@ def generate_solutions(row, column):
         solution = place_queen(queen, column, solution)
     return solution
 
+
 def place_queen(queen, column, prev_solution):
     """Place a queen on the chessboard while maintaining valid placements.
 
@@ -36,6 +37,7 @@ def place_queen(queen, column, prev_solution):
                 safe_position.append(array + [x])
     return safe_position
 
+
 def is_safe(q, x, array):
     """Check if placing a queen at a given position is safe.
 
@@ -52,6 +54,7 @@ def is_safe(q, x, array):
     else:
         return all(abs(array[column] - x) != q - column
                    for column in range(q))
+
 
 def init():
     """Initialize the N value and perform input validation.
@@ -72,6 +75,7 @@ def init():
         sys.exit(1)
     return n
 
+
 def n_queens():
     """Solve and print solutions for the N Queens problem."""
     n = init()
@@ -81,6 +85,7 @@ def n_queens():
         for q, x in enumerate(array):
             clean.append([q, x])
         print(clean)
+
 
 if __name__ == '__main__':
     n_queens()
