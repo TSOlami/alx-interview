@@ -3,8 +3,8 @@
 """
 
 def makeChange(coins, total):
-    if total < 0:
-        return -1
+    if total <= 0:
+        return 0
 
     # Initialize a table to store the minimum number
 	# of coins needed for each amount from 0 to total
