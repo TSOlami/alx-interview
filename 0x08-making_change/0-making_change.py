@@ -1,8 +1,10 @@
 #!/usr/bin/python3
-"""
+"""Dynamic Programming
 """
 
 def makeChange(coins, total):
+    “””The make change module
+    ”””
     if total <= 0:
         return 0
 
