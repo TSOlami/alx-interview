@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""Solving the Prime Game"""
+"""
+Solving the Prime Game
+"""
 
 
 def is_prime(num):
@@ -47,12 +49,10 @@ def isWinner(x, nums):
 
     Args:
         x (int): The number of rounds.
-        nums (list): List of integers representing
-        the values of n for each round.
+        nums (list): List of n's to check.
 
     Returns:
-        str or None: The name of the player with
-        the most wins or None if it cannot be determined.
+        str or None: The name of the player that won the most rounds,
     """
     def play_game(n):
         if n == 1:
