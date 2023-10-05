@@ -1,81 +1,44 @@
 #!/usr/bin/python3
-"""
-Solving the Prime Game
-"""
-
-
-def is_prime(num):
-    """
-    Check if a number is prime.
-
-    Args:
-        num (int): The number to check.
-
-    Returns:
-        bool: True if the number is prime, False otherwise.
-    """
-    if num < 2:
-        return False
-    for i in range(2, int(num**0.5) + 1):
-        if num % i == 0:
-            return False
-    return True
-
-
-def calculate_primes(n):
-    """
-    Calculate prime numbers up to n.
-
-    Args:
-        n (int): The maximum number to calculate primes up to.
-
-    Returns:
-        list: List of prime numbers.
-    """
-    primes = [True] * (n + 1)
-    primes[0] = primes[1] = False
-
-    for p in range(2, int(n**0.5) + 1):
-        if primes[p]:
-            for i in range(p * p, n + 1, p):
-                primes[i] = False
-
-    return [i for i, is_prime in enumerate(primes) if is_prime]
+"""Module for solving the prime game question."""
 
 
 def isWinner(x, nums):
     """
-    Determine the winner of multiple rounds of the prime game.
+    Determine the winner of the prime game.
 
     Args:
-        x (int): The number of rounds.
-        nums (list): List of n's to check.
+    x (int): The number of rounds.
+    nums (list): An array of n for each round.
 
     Returns:
-        str or None: The name of the player that won the most rounds,
+    str: The name of the player that won the most rounds,
+    or None if the winner cannot be determined.
     """
-    def play_game(n):
-        if n == 1:
-            return "Ben"
-        primes = calculate_primes(n)
-        if len(primes) % 2 == 0:
-            return "Maria"
-        else:
-            return "Ben"
+    if not nums or x < 1:
+        return None
+
+    max_num = max(nums)
+
+    is_prime = [True for _ in range(max(max_num + 1, 2))]
+    for i in range(2, int(pow(max_num, 0.5)) + 1):
+        if not is_prime[i]:
+            continue
+        for j in range(i * i, max_num + 1, i):
+            is_prime[j] = False
+    is_prime[0] = is_prime[1] = False
+
+    prime_count = 0
+    for i in range(len(is_prime)):
+        if is_prime[i]:
+            prime_count += 1
+        is_prime[i] = prime_count
 
     maria_wins = 0
-    ben_wins = 0
+    for num in nums:
+        maria_wins += is_prime[num] % 2 == 1
 
-    for n in nums:
-        winner = play_game(n)
-        if winner == "Maria":
-            maria_wins += 1
-        elif winner == "Ben":
-            ben_wins += 1
-
-    if maria_wins > ben_wins:
-        return "Maria"
-    elif ben_wins > maria_wins:
-        return "Ben"
-    else:
+    if maria_wins * 2 == len(nums):
         return None
+    if maria_wins * 2 > len(nums):
+        return "Maria"
+    return "Ben"
